@@ -227,6 +227,116 @@
       display:grid; place-items:center;
       font-size:13px; font-weight:600; cursor:pointer;
     }
+
+
+    /* Top-right notification and profile dropdowns */
+    .topbar-menu-wrap { position:relative; }
+    .top-dropdown {
+      position:absolute;
+      top:46px;
+      right:0;
+      width:320px;
+      max-width:calc(100vw - 24px);
+      background:rgba(15,30,56,.98);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      box-shadow:0 20px 50px rgba(0,0,0,.38);
+      backdrop-filter:blur(18px);
+      padding:14px;
+      display:none;
+      z-index:150;
+      animation:dropIn .22s ease both;
+    }
+    .top-dropdown.open { display:block; }
+    @keyframes dropIn { from{opacity:0;transform:translateY(-8px) scale(.98)} to{opacity:1;transform:none} }
+    .dropdown-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:4px 4px 12px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      margin-bottom:10px;
+    }
+    .dropdown-head h4 { font-size:14px; font-weight:700; }
+    .dropdown-head span { font-size:11px; color:var(--muted); }
+    .mini-notif-list { display:flex; flex-direction:column; gap:8px; }
+    .mini-notif {
+      display:flex;
+      gap:10px;
+      padding:11px;
+      border-radius:12px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .mini-notif.unread { border-left:3px solid var(--gold); }
+    .mini-ico {
+      width:32px;
+      height:32px;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+    }
+    .mini-title { font-size:12.5px; font-weight:600; margin-bottom:3px; }
+    .mini-text { font-size:11.5px; color:var(--muted); line-height:1.45; }
+    .mini-time { font-size:10.5px; color:rgba(255,255,255,.35); margin-top:4px; }
+    .dropdown-action {
+      width:100%;
+      margin-top:12px;
+      padding:10px 12px;
+      border:none;
+      border-radius:10px;
+      background:rgba(201,168,76,.12);
+      color:var(--gold-lt);
+      font-size:12.5px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .mini-profile-top {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:4px 4px 14px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      margin-bottom:12px;
+    }
+    .mini-profile-avatar {
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--gold),var(--slate));
+      border:2px solid rgba(201,168,76,.55);
+      font-family:'Playfair Display',serif;
+      font-size:18px;
+      font-weight:700;
+      flex-shrink:0;
+    }
+    .mini-profile-name { font-family:'Playfair Display',serif; font-size:18px; margin-bottom:3px; }
+    .mini-profile-role { font-size:12px; color:var(--muted); }
+    .mini-profile-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+    .mini-profile-field {
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:9px 10px;
+      border-radius:10px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.055);
+      font-size:12px;
+    }
+    .mini-profile-field span { color:var(--muted); }
+    .mini-profile-field strong { color:var(--white); font-weight:600; text-align:right; }
+    .profile-menu-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+    .profile-menu-actions .dropdown-action { margin-top:0; }
+    .profile-menu-actions .dropdown-action.secondary { background:rgba(255,255,255,.06); color:rgba(255,255,255,.85); }
+
     .hamburger {
       display:none; background:none; border:none; cursor:pointer;
       flex-direction:column; gap:4px; padding:4px;
@@ -267,6 +377,28 @@
     /* Main content */
     .db-main { padding:28px 28px 40px; overflow-y:auto; }
 
+    /* Dashboard inner sections */
+    .dashboard-section { display:none; animation:cardIn .45s both; }
+    .dashboard-section.active { display:block; }
+    .dashboard-page-title {
+      margin-bottom:20px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .dashboard-page-title h2 {
+      font-family:'Playfair Display',serif;
+      font-size:26px;
+      color:var(--white);
+      margin-bottom:4px;
+    }
+    .dashboard-page-title p {
+      font-size:13px;
+      color:var(--muted);
+    }
+
+
     .welcome-strip {
       background:linear-gradient(120deg,var(--slate) 0%,#152845 60%,rgba(201,168,76,0.08) 100%);
       border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius);
@@ -285,6 +417,137 @@
     }
 
     @keyframes cardIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+
+    /* Profile details */
+    .profile-card {
+      display:grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap:18px;
+      margin-bottom:26px;
+      animation:cardIn .5s .18s both;
+    }
+    .profile-summary,
+    .profile-info {
+      background:rgba(255,255,255,0.035);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--radius);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .profile-summary::after {
+      content:'';
+      position:absolute;
+      right:-70px;
+      top:-70px;
+      width:170px;
+      height:170px;
+      border-radius:50%;
+      background:rgba(201,168,76,.10);
+      pointer-events:none;
+    }
+    .profile-user {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      position:relative;
+      z-index:1;
+    }
+    .profile-photo {
+      width:78px;
+      height:78px;
+      border-radius:22px;
+      background:linear-gradient(135deg,var(--gold),var(--slate));
+      border:2px solid rgba(201,168,76,.55);
+      display:grid;
+      place-items:center;
+      font-family:'Playfair Display',serif;
+      font-size:26px;
+      font-weight:700;
+      color:var(--white);
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      flex-shrink:0;
+    }
+    .profile-name {
+      font-family:'Playfair Display',serif;
+      font-size:22px;
+      margin-bottom:5px;
+    }
+    .profile-role {
+      font-size:12.5px;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    .profile-tags {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .profile-tag {
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:5px 10px;
+      border-radius:20px;
+      font-size:11.5px;
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .profile-actions {
+      display:flex;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:1;
+    }
+    .profile-btn {
+      border:1px solid rgba(201,168,76,.35);
+      background:rgba(201,168,76,.10);
+      color:var(--gold-lt);
+      border-radius:10px;
+      padding:10px 14px;
+      font-size:12.5px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .2s, background .2s;
+    }
+    .profile-btn:hover {
+      transform:translateY(-2px);
+      background:rgba(201,168,76,.16);
+    }
+    .profile-btn.secondary {
+      border-color:rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.82);
+    }
+    .profile-info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .profile-field {
+      padding:12px;
+      border-radius:10px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .profile-field span {
+      display:block;
+      font-size:10px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.07em;
+      margin-bottom:5px;
+    }
+    .profile-field strong {
+      display:block;
+      font-size:13px;
+      color:var(--white);
+      font-weight:600;
+      word-break:break-word;
+    }
 
     /* Stats */
     .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:26px; }
@@ -515,6 +778,9 @@
     @media(max-width:1100px){
       .stats-grid{grid-template-columns:repeat(2,1fr)}
       .content-grid{grid-template-columns:1fr}
+
+      .profile-card{grid-template-columns:1fr}
+
       .bottom-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:800px){
@@ -578,6 +844,16 @@
       .stat-card,.service-card,.card-box{padding:16px}
       .db-main{padding:16px 12px 28px}
       .welcome-strip{padding:18px}
+
+      .profile-user{align-items:flex-start}
+      .profile-photo{width:64px;height:64px;border-radius:18px;font-size:22px}
+      .profile-actions{flex-direction:column}
+      .profile-info-grid{grid-template-columns:1fr}
+
+      .top-dropdown{top:42px;right:-4px;width:300px;padding:12px}
+      .mini-profile-field{flex-direction:column;gap:4px}
+      .mini-profile-field strong{text-align:left}
+
     }
     @media(max-width:380px){
       .brand-sub{display:none}
@@ -807,11 +1083,50 @@
     </div>
 
     <div class="topbar-right">
-      <div class="notif-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        <span class="notif-badge"></span>
+      <div class="topbar-menu-wrap">
+        <button class="notif-btn" id="notifTopBtn" type="button" onclick="toggleTopMenu('notifDropdown')" aria-label="Open notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+
+        <div class="top-dropdown" id="notifDropdown">
+          <div class="dropdown-head">
+            <div><h4>Notifications</h4><span>3 latest updates</span></div>
+            <span>🔔</span>
+          </div>
+          <div class="mini-notif-list">
+            <div class="mini-notif unread"><div class="mini-ico" style="background:rgba(240,92,92,.12)">⚠️</div><div><div class="mini-title">Action Required</div><div class="mini-text">Upload land record for PM Kisan enrollment.</div><div class="mini-time">2 hours ago</div></div></div>
+            <div class="mini-notif unread"><div class="mini-ico" style="background:rgba(61,204,142,.12)">✅</div><div><div class="mini-title">Aadhaar Approved</div><div class="mini-text">Your name update has been approved.</div><div class="mini-time">Today 9:42 AM</div></div></div>
+            <div class="mini-notif"><div class="mini-ico" style="background:rgba(201,168,76,.12)">📅</div><div><div class="mini-title">Appointment Confirmed</div><div class="mini-text">Passport verification: Jun 14, 10:00 AM.</div><div class="mini-time">Yesterday</div></div></div>
+          </div>
+          <button class="dropdown-action" type="button" onclick="openDashboardSection('home')">View All Notifications</button>
+        </div>
       </div>
-      <div class="db-avatar">RK</div>
+
+      <div class="topbar-menu-wrap">
+        <button class="db-avatar" id="profileTopBtn" type="button" onclick="toggleTopMenu('profileDropdown')" aria-label="Open profile details">RK</button>
+
+        <div class="top-dropdown" id="profileDropdown">
+          <div class="mini-profile-top">
+            <div class="mini-profile-avatar">RK</div>
+            <div>
+              <div class="mini-profile-name">Rahul Kumar</div>
+              <div class="mini-profile-role">Verified Citizen · Karnataka</div>
+            </div>
+          </div>
+          <div class="mini-profile-grid">
+            <div class="mini-profile-field"><span>Citizen ID</span><strong>CIT-2026-98421</strong></div>
+            <div class="mini-profile-field"><span>Aadhaar</span><strong>XXXX XXXX 4587</strong></div>
+            <div class="mini-profile-field"><span>Email</span><strong>rahul.kumar@example.com</strong></div>
+            <div class="mini-profile-field"><span>Mobile</span><strong>+91 98765 43210</strong></div>
+            <div class="mini-profile-field"><span>Status</span><strong>Aadhaar Verified</strong></div>
+          </div>
+          <div class="profile-menu-actions">
+            <button class="dropdown-action" type="button" onclick="openDashboardSection('profile')">Full Profile</button>
+            <button class="dropdown-action secondary" type="button" onclick="navigate('login')">Sign Out</button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -822,28 +1137,30 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-section">
         <div class="sidebar-label">Overview</div>
-        <div class="nav-item active"><div class="nav-icon">🏠</div> Dashboard</div>
-        <div class="nav-item"><div class="nav-icon">📋</div> My Applications<span class="nav-badge">3</span></div>
-        <div class="nav-item"><div class="nav-icon">📄</div> Documents</div>
+        <div class="nav-item active" data-section="home"><div class="nav-icon">🏠</div> Dashboard</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">📋</div> My Applications<span class="nav-badge">3</span></div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">📄</div> Documents</div>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">Services</div>
-        <div class="nav-item"><div class="nav-icon">🏥</div> Health Services</div>
-        <div class="nav-item"><div class="nav-icon">🎓</div> Education</div>
-        <div class="nav-item"><div class="nav-icon">🏗️</div> Housing &amp; Land</div>
-        <div class="nav-item"><div class="nav-icon">💰</div> Financial Aid</div>
-        <div class="nav-item"><div class="nav-icon">🚜</div> Agriculture</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">🏥</div> Health Services</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">🎓</div> Education</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">🏗️</div> Housing &amp; Land</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">💰</div> Financial Aid</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">🚜</div> Agriculture</div>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">Account</div>
-        <div class="nav-item"><div class="nav-icon">👤</div> Profile</div>
-        <div class="nav-item"><div class="nav-icon">🔒</div> Security</div>
+        <div class="nav-item" data-section="profile"><div class="nav-icon">👤</div> Profile</div>
+        <div class="nav-item" data-section="home"><div class="nav-icon">🔒</div> Security</div>
         <div class="nav-item" onclick="navigate('login')"><div class="nav-icon">🚪</div> Sign Out</div>
       </div>
     </aside>
 
     <!-- Main -->
     <main class="db-main">
+
+      <section class="dashboard-section active" id="section-home">
 
       <div class="welcome-strip">
         <div>
@@ -855,6 +1172,7 @@
           Aadhaar Verified
         </div>
       </div>
+
 
       <!-- Stats -->
       <div class="stats-grid">
@@ -958,6 +1276,54 @@
         </div>
       </div>
 
+      </section>
+
+      <section class="dashboard-section" id="section-profile">
+        <div class="dashboard-page-title">
+          <div>
+            <h2>Profile</h2>
+            <p>View and manage your citizen account details.</p>
+          </div>
+          <div class="verify-chip">Aadhaar Verified</div>
+        </div>
+
+      <!-- Profile Details -->
+      <div class="profile-card">
+        <div class="profile-summary">
+          <div class="profile-user">
+            <div class="profile-photo">RK</div>
+            <div>
+              <div class="profile-name">Rahul Kumar</div>
+              <div class="profile-role">Verified Citizen · Karnataka</div>
+              <div class="profile-tags">
+                <span class="profile-tag">🟢 Active Account</span>
+                <span class="profile-tag">🪪 Aadhaar Linked</span>
+                <span class="profile-tag">🔐 Secure Login</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="profile-btn">Edit Profile</button>
+            <button class="profile-btn secondary">Download ID</button>
+          </div>
+        </div>
+
+        <div class="profile-info">
+          <div class="section-head"><h3>Profile Details</h3><a href="#">Update</a></div>
+          <div class="profile-info-grid">
+            <div class="profile-field"><span>Citizen ID</span><strong>CIT-2026-98421</strong></div>
+            <div class="profile-field"><span>Aadhaar</span><strong>XXXX XXXX 4587</strong></div>
+            <div class="profile-field"><span>Email</span><strong>rahul.kumar@example.com</strong></div>
+            <div class="profile-field"><span>Mobile</span><strong>+91 98765 43210</strong></div>
+            <div class="profile-field"><span>Date of Birth</span><strong>14 Aug 1998</strong></div>
+            <div class="profile-field"><span>Address</span><strong>Bengaluru, Karnataka</strong></div>
+          </div>
+        </div>
+      </div>
+
+
+      </section>
+
     </main>
   </div>
 </div>
@@ -1006,8 +1372,49 @@ document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', function() {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     this.classList.add('active');
+
+    closeTopMenus();
+    const sectionName = this.dataset.section;
+    if (sectionName) {
+      document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+      const targetSection = document.getElementById('section-' + sectionName);
+      if (targetSection) targetSection.classList.add('active');
+      document.querySelector('.db-main').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     if (window.innerWidth <= 800) closeSidebar();
   });
+});
+
+
+
+/* ── TOP RIGHT DROPDOWNS ── */
+function closeTopMenus() {
+  document.querySelectorAll('.top-dropdown').forEach(menu => menu.classList.remove('open'));
+}
+function toggleTopMenu(menuId) {
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+  const willOpen = !menu.classList.contains('open');
+  closeTopMenus();
+  if (willOpen) menu.classList.add('open');
+}
+function openDashboardSection(sectionName) {
+  closeTopMenus();
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  const nav = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
+  if (nav) nav.classList.add('active');
+  document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+  const targetSection = document.getElementById('section-' + sectionName);
+  if (targetSection) targetSection.classList.add('active');
+  document.querySelector('.db-main').scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.innerWidth <= 800) closeSidebar();
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.topbar-menu-wrap')) closeTopMenus();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeTopMenus();
 });
 
 /* ── PASSWORD TOGGLE (login) ── */
